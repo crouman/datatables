@@ -632,9 +632,15 @@
 				//unfocus button
 				$('#btn-full-screen').blur();
 			}
-			$(window).scroll(function(){
-				table.draw(true);					
+			
+			//redraw once
+			
+			$(window).one("scroll", function(event){
+				table.draw(true);		
+				console.log('redraw');
 			})
+			
+			//$(window).scrollTop(10);
 			
 		})
 						
