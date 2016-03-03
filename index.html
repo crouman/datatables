@@ -617,20 +617,33 @@
 				//enable fixed header
 				table
 					.fixedHeader.enable()
+					.responsive.recalc();
 			}
 			else{
 				//show navbar
 				navbar.fadeIn(250);
 				//swap containter classes; make static
-				main.animate({width:mainWidth}, 500);
-				main.removeClass("container-fluid").addClass("container");	
-				//animate
+				main
+					.animate({width:mainWidth}, 500, function after(){
+						main.removeAttr('style')	
+					})					
+					.removeClass("container-fluid")
+					.addClass("container");					
+				//.css('width', mainWidth);
+									
+				//animate scope controls
 				scopeControls.animate({opacity: 1, height: "200px"}, 500);
 				scopeWrapper.animate({opacity: 1, paddingTop: "65px", height: "100%"}, 500);
 				//table adjustments
-				table.fixedHeader.disable();
+				table
+					.fixedHeader.disable()
+					.responsive.rebuild()					
+					.responsive.recalc()
+					.draw(true);
 				//unfocus button
 				$('#btn-full-screen').blur();
+				
+				main.removeAttr('style');
 			}
 			
 			//redraw once
